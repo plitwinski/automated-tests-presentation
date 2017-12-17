@@ -1,0 +1,5 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/examples/01 - coarse grained unit tests/.vs/Example.CoarseGrainedUTest/v15/Server/sqlite3
