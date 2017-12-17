@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\02 - in-memory dependencies\Example.InMemoryDependencies\Example.InMemoryDependencies.csproj" />
+    <ProjectReference Include="..\Example.InMemoryDependencies\Example.InMemoryDependencies.csproj" />
   </ItemGroup>
 
 </Project>

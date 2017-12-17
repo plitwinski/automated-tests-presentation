@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.InMemoryDependencies", "Example.InMemoryDependencies\Example.InMemoryDependencies.csproj", "{3DC7F22E-6182-4ABC-87BD-D0CD5C827169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.InMemoryDependencies.Tests", "..\Example.InMemoryDependencies.Tests\Example.InMemoryDependencies.Tests.csproj", "{D3EF9028-A469-4C44-BC1D-973B5D8E2593}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.InMemoryDependencies.Tests", "Example.InMemoryDependencies.Tests\Example.InMemoryDependencies.Tests.csproj", "{D3EF9028-A469-4C44-BC1D-973B5D8E2593}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,9 +3,6 @@ using Example.InMemoryDependencies.Models;
 using Example.InMemoryDependencies.Tests.Factories;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Example.InMemoryDependencies.Tests.Controllers
