@@ -7,3 +7,8 @@
 /examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest.Tests/obj
 /examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest.Tests/bin/Debug/netcoreapp2.0
 /examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest/bin/Debug/netstandard2.0
+/examples/02 - in-memory dependencies/.vs/Example.InMemoryDependencies/v15/Server/sqlite3
+/examples/02 - in-memory dependencies/Example.InMemoryDependencies/bin/Debug/netcoreapp2.0
+/examples/02 - in-memory dependencies/Example.InMemoryDependencies/obj
+/examples/Example.InMemoryDependencies.Tests/bin/Debug/netcoreapp2.0
+/examples/Example.InMemoryDependencies.Tests/obj
