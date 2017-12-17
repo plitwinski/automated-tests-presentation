@@ -3,3 +3,7 @@
 ################################################################################
 
 /examples/01 - coarse grained unit tests/.vs/Example.CoarseGrainedUTest/v15/Server/sqlite3
+/examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest/obj
+/examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest.Tests/obj
+/examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest.Tests/bin/Debug/netcoreapp2.0
+/examples/01 - coarse grained unit tests/Example.CoarseGrainedUTest/bin/Debug/netstandard2.0
