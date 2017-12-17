@@ -9,7 +9,7 @@ namespace Example.CoarseGrainedUTest
 {
     public class MovieRepository : IMovieRepository
     {
-        private const string MoviesLocation = @"C:\Cienams\";
+        private const string MoviesLocation = @"C:\Cineams\";
 
         private readonly IFileReader fileReader;
 

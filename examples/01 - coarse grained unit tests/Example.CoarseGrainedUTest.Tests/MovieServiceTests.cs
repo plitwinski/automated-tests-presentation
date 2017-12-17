@@ -30,11 +30,12 @@ namespace Example.CoarseGrainedUTest.Tests
 
         private static Mock<IFileReader> CreateFileReader()
         {
+            const string ExpectedCinemasFolder = @"C:\Cineams\";
             var fileReader = new Mock<IFileReader>();
-            fileReader.Setup(p => p.GetFileDataAsync($"C:\\Cienams\\{Cinema1}")).ReturnsAsync(new[] {
+            fileReader.Setup(p => p.GetFileDataAsync($"{ExpectedCinemasFolder}{Cinema1}")).ReturnsAsync(new[] {
                $"1;Director1;{Movie1}"
             });
-            fileReader.Setup(p => p.GetFileDataAsync($"C:\\Cienams\\{Cinema2}")).ReturnsAsync(new[] {
+            fileReader.Setup(p => p.GetFileDataAsync($"{ExpectedCinemasFolder}{Cinema2}")).ReturnsAsync(new[] {
                 $"2;Director2;{Movie2}"
             });
             return fileReader;
