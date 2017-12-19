@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/plitwinski/automated-tests-presentation",
   "scripts": {
-    "test": "concurrently --kill-others \"npm run startWebServer\" \"npm run startApi\" \"jest\"",
+    "selenium-test": "concurrently --kill-others \"npm run startWebServer\" \"npm run startApi\" \"jest\"",
     "start": "concurrently --kill-others \"npm run startWebServer\" \"npm run startApi\"",
     "startWebServer": "browserify --debug --extension=js -o src/bundle.js src/index.js && http-server -p 8000",
     "startApi": "json-server --watch test_data/db.json"
