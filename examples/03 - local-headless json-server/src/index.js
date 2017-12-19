@@ -15,10 +15,10 @@ const config = {
 class Movies extends Component {
   render() {
     const { items, onLoadClick } = this.props
-    const listItems = items.map((item) => <li>{item.title}, {item.director}</li>)
+    const listItems = items.map((item) => <li><div id={item.id}>{item.title}</div> {item.director}</li>)
     return (
       <div>
-        <button onClick={onLoadClick}>Load data</button>
+        <button id='loadBtn' onClick={onLoadClick}>Load data</button>
         <ul>{listItems}</ul>
       </div>
     )
