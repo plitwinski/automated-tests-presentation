@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
@@ -14,3 +14,4 @@
 /examples/Example.InMemoryDependencies.Tests/obj
 /examples/02 - in-memory dependencies/Example.InMemoryDependencies.Tests/bin/Debug/netcoreapp2.0
 /examples/02 - in-memory dependencies/Example.InMemoryDependencies.Tests/obj
+examples/03 - local headless + json server/node_modules/
