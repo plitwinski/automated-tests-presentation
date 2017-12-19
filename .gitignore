@@ -16,3 +16,4 @@
 /examples/02 - in-memory dependencies/Example.InMemoryDependencies.Tests/obj
 examples/03 - local headless + json server/node_modules/
 examples/03 - local-headless json-server/node_modules/
+examples/03 - local-headless json-server/src/bundle*
