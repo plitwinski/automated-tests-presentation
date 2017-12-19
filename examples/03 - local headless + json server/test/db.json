@@ -1,0 +1,7 @@
+{
+    "movies": [
+        {"id": 1, "title": "Movie 1", "director": "Director 1"},
+        {"id": 2, "title": "Movie 2", "director": "Director 2"},
+        {"id": 3, "title": "Movie 3", "director": "Director 3"}
+    ]
+}
