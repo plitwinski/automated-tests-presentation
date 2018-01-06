@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Example.CoarseGrainedUTest
+namespace Example.CoarseGrainedUTest.Core
 {
     public class QueueClient : IQueueClient
     {

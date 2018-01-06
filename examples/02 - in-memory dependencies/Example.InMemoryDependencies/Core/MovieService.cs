@@ -1,5 +1,4 @@
-﻿using Example.InMemoryDependencies.DataAccess;
-using Example.InMemoryDependencies.Messages;
+﻿using Example.InMemoryDependencies.Messages;
 using Example.InMemoryDependencies.Models;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Example.InMemoryDependencies.Models;
 
-namespace Example.InMemoryDependencies.DataAccess
+namespace Example.InMemoryDependencies.Core
 {
     public interface IMovieRepository
     {

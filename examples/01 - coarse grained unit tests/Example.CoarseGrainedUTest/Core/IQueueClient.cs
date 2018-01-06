@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Example.CoarseGrainedUTest
+namespace Example.CoarseGrainedUTest.Core
 {
     public interface IQueueClient
     {

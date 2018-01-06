@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Example.CoarseGrainedUTest.Models;
 
-namespace Example.CoarseGrainedUTest
+namespace Example.CoarseGrainedUTest.Core
 {
     public interface IMovieRepository
     {

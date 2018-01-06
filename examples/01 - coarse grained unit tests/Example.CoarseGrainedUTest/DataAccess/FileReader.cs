@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace Example.CoarseGrainedUTest
+namespace Example.CoarseGrainedUTest.DataAccess
 {
     public class FileReader : IFileReader
     {

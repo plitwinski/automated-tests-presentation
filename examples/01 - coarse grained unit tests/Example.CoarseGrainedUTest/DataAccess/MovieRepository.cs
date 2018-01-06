@@ -1,11 +1,12 @@
-﻿using Example.CoarseGrainedUTest.Models;
+﻿using Example.CoarseGrainedUTest.Core;
+using Example.CoarseGrainedUTest.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Example.CoarseGrainedUTest
+namespace Example.CoarseGrainedUTest.DataAccess
 {
     public class MovieRepository : IMovieRepository
     {

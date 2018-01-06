@@ -1,4 +1,6 @@
-﻿using Example.CoarseGrainedUTest.Messages;
+﻿using Example.CoarseGrainedUTest.Core;
+using Example.CoarseGrainedUTest.DataAccess;
+using Example.CoarseGrainedUTest.Messages;
 using Moq;
 using NUnit.Framework;
 using System.Threading.Tasks;
