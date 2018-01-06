@@ -15,7 +15,7 @@ namespace Example.InMemoryDependencies.Tests
 
         protected override void RegisterDatabase(IServiceCollection services)
         {
-            services.AddDbContext<MoviesContext>(options => options.UseInMemoryDatabase());
+            services.AddDbContext<MoviesContext>(options => options.UseInMemoryDatabase("databaseName"));
         }
 
         protected override void RegisterCoreServices(IServiceCollection services)
