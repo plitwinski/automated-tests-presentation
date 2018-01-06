@@ -1,8 +1,7 @@
-﻿using Example.InMemoryDependencies.Models;
+﻿using Example.InMemoryDependencies.Core;
+using Example.InMemoryDependencies.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 

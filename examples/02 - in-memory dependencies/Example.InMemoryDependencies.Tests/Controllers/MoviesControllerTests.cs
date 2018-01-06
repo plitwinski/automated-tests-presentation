@@ -32,6 +32,8 @@ namespace Example.InMemoryDependencies.Tests.Controllers
 
             Assert.That(cinemaUpdates[0].Name, Is.EqualTo(Cinema1));
             Assert.That(cinemaUpdates[1].Name, Is.EqualTo(Cinema2));
+            Assert.IsNotEmpty(cinemaUpdates[0].AddedMovies);
+            Assert.IsNotEmpty(cinemaUpdates[1].AddedMovies);
         }
 
         private static MoviesContext SetupDatabase(Microsoft.AspNetCore.TestHost.TestServer server)
