@@ -1,0 +1,28 @@
+﻿using System;
+using Example.InMemoryDependencies;
+using Example.InMemoryDependencies.Core;
+using Example.InMemoryDependencies.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
+
+namespace Example.ScenarioTesting.Tests
+{
+    public class TestStartup : Startup
+    {
+        public TestStartup()
+        {
+        }
+
+        protected override void RegisterDatabase(IServiceCollection services)
+        {
+            services.AddDbContext<MoviesContext>(options => options.UseInMemoryDatabase("databaseName"));
+        }
+
+        protected override void RegisterCoreServices(IServiceCollection services)
+        {
+            base.RegisterCoreServices(services);
+            services.AddTransient(_ => Mock.Of<IQueueClient>());
+        }
+    }
+}
