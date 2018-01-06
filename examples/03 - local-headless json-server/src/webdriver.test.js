@@ -1,25 +1,24 @@
-const {Builder, By, Key, until} = require('selenium-webdriver')
-const firefox = require('selenium-webdriver/firefox');
-const gecodriver = require('geckodriver');
+import {Builder, By, Key, until} from 'selenium-webdriver'
+import firefox from 'selenium-webdriver/firefox';
+import gecodriver from 'geckodriver';
 
-test('make sure movies list has been rendered', (done) => {
-    
-    const binary = new firefox.Binary(firefox.Channel.NIGHTLY);
-    binary.addArguments("-headless");
+let driver = null
 
-    const driver = new Builder()
-    .forBrowser('firefox')
-    .setFirefoxOptions(new firefox.Options().setBinary(binary))
-    .build();
+beforeAll(() => {
+  const binary = new firefox.Binary(firefox.Channel.NIGHTLY);
+  binary.addArguments("-headless");
+  driver = new Builder()
+  .forBrowser('firefox')
+  .setFirefoxOptions(new firefox.Options().setBinary(binary))
+  .build();
+}, 20000)
 
-    driver.get('http://127.0.0.1:8000/src/index.html').then(() => {
-        driver.findElement(By.id('loadBtn')).sendKeys('webdriver', Key.ENTER)
-        driver.wait(until.elementsLocated(By.id('1')), 1000).then(() => {
-            driver.findElements(By.tagName('li')).then(items => {
-                expect(items.length).toBe(3)
-                driver.quit()
-                done()
-            })
-        })
-    });
-});
+test('make sure movies list has been rendered', async () => {
+  await driver.get('http://127.0.0.1:8000/src/index.html')
+  driver.findElement(By.id('loadBtn')).sendKeys('webdriver', Key.ENTER)
+
+  await driver.wait(until.elementsLocated(By.id('1')), 1000)
+  const items = await driver.findElements(By.tagName('li'))
+  expect(items.length).toBe(3)
+  driver.quit()
+}, 20000)
