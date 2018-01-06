@@ -17,3 +17,6 @@
 examples/03 - local headless + json server/node_modules/
 examples/03 - local-headless json-server/node_modules/
 examples/03 - local-headless json-server/src/bundle*
+examples/04 - testing-scenarios/.vs/
+examples/04 - testing-scenarios/Example.TestingScenarios.Tests/bin/
+examples/04 - testing-scenarios/Example.TestingScenarios.Tests/obj/
