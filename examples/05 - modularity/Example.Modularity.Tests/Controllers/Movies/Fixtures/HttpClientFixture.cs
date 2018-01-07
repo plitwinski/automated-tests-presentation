@@ -7,13 +7,13 @@ namespace Example.Modularity.Tests.Controllers.Movies.Fixtures
 {
     public class HttpClientFixture
     {
-        private readonly ServerBuilder serverFactory;
+        private readonly ServerBuilder serverBuilder;
 
         public Mock<IQueueClient> QueueClientMock { get; private set; }
 
         public HttpClientFixture()
         {
-            serverFactory = new ServerBuilder();
+            serverBuilder = new ServerBuilder();
         }
 
         public HttpClientFixture AddMovies()
@@ -21,20 +21,20 @@ namespace Example.Modularity.Tests.Controllers.Movies.Fixtures
             var context = new MoviesContextBuilder("databaseNameFixture")
                 .AddEntities(Data.Movie())
                 .Build();
-            serverFactory.AddMock(context);
+            serverBuilder.AddMock(context);
             return this;
         }
 
         public HttpClientFixture AddQueueClient()
         {
             QueueClientMock = new Mock<IQueueClient>();
-            serverFactory.AddMock(QueueClientMock.Object);
+            serverBuilder.AddMock(QueueClientMock.Object);
             return this;
         }
 
         public HttpClient Create()
         {
-            return serverFactory.Build().CreateClient();
+            return serverBuilder.Build().CreateClient();
         }
     }
 }
