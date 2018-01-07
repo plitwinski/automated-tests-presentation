@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Example.Modularity.Tests.Controllers.Movies
 {
-    public class WhenUpdatesArrivedWithFixture : ScenarioTestingBase
+    public class WhenUpdatesRequestedWithFixture : ScenarioTestingBase
     {
         private const string Cinema1 = "Cinema1";
         private const string Cinema2 = "Cinema2";
