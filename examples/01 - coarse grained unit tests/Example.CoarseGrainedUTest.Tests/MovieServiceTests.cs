@@ -16,7 +16,7 @@ namespace Example.CoarseGrainedUTest.Tests
         private const string Movie2 = "Movie2";
 
         [Test]
-        public async Task WhenCheckOccures_ThenMessagesAreSent()
+        public async Task WhenCheckOccures_ThenMessagesWereSent()
         {
             Mock<IFileReader> fileReader = CreateFileReader();
             var queueClient = new Mock<IQueueClient>();
