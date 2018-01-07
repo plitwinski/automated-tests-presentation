@@ -3,10 +3,11 @@
 ## prerequisites
 
 ### example 01, 02, 04, 05
-.NET Core 2.0 SDK (or higher)
+* .NET Core 2.0 SDK (or higher)
 
 ### example 03
-nodejs  6.9.5 (or higher)
+* nodejs  6.9.5 (or higher)
+* firefox 57.0.4 (or higher)
 
 ## example 01 - coarse grained unit tests
 #### run following commands
