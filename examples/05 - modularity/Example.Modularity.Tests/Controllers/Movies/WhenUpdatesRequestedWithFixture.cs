@@ -18,14 +18,13 @@ namespace Example.Modularity.Tests.Controllers.Movies
         private HttpClientFixture _clientFixture;
         private HttpClient _client;
 
-        public override Task Given()
+        public override async Task Given()
         {
             _clientFixture = new HttpClientFixture()
                 .AddMovies()
                 .AddQueueClient();
 
             _client = _clientFixture.Create();
-            return Task.CompletedTask;
         }
 
 

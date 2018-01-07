@@ -19,7 +19,7 @@ namespace Example.Modularity.Tests.Controllers.Movies
         private HttpClient _client;
         private Mock<IQueueClient> _queueClientMock;
 
-        public override Task Given()
+        public override async Task Given()
         {
             _queueClientMock = new Mock<IQueueClient>();
 
@@ -33,17 +33,13 @@ namespace Example.Modularity.Tests.Controllers.Movies
                 .Create();
 
             _client = server.CreateClient();
-            return Task.CompletedTask;
         }
 
 
         public override async Task When()
         {
             var result = await _client.GetAsync("api/movieUpdates");
-
-            var content = await result.Content.ReadAsStringAsync();
-
-            _cinemaUpdates = JsonConvert.DeserializeObject<CinemaUpdate[]>(content);
+            _cinemaUpdates = JsonConvert.DeserializeObject<CinemaUpdate[]>(await result.Content.ReadAsStringAsync());
         }
 
         [Test]
