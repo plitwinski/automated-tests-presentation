@@ -13,7 +13,7 @@ nodejs  6.9.5 (or higher)
 ## example 1
 
 #### run following commands
-⋅⋅* dotnet restore
-⋅⋅* navigate to Example.CoarseGrainedUTest.Tests and run dotnet test
+* dotnet restore
+* navigate to Example.CoarseGrainedUTest.Tests and run dotnet test
 
 #### or open, compile and run via test explorer in Visual Studio 2017
