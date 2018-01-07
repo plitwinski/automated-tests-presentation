@@ -16,5 +16,5 @@ nodejs  6.9.5 (or higher)
 * dotnet restore
 * cd Example.CoarseGrainedUTest.Tests 
 * dotnet test
-#### or
+##### or
 #### open, compile and run via test explorer in Visual Studio 2017
