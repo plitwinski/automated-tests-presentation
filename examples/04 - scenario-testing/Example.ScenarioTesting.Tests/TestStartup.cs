@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Example.InMemoryDependencies;
-using Example.InMemoryDependencies.Core;
-using Example.InMemoryDependencies.DataAccess;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 
 namespace Example.ScenarioTesting.Tests
 {
