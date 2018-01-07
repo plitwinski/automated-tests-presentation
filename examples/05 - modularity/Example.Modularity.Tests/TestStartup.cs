@@ -14,9 +14,8 @@ namespace Example.Modularity.Tests
             this.mockedServices = mockedServices;
         }
 
-        protected override void RegisterCoreServices(IServiceCollection services)
+        protected override void AfterAllServicesRegistered(IServiceCollection services)
         {
-            base.RegisterCoreServices(services);
             foreach (var mockedService in mockedServices)
                 services.AddTransient(mockedService.Key, _ => mockedService.Value);
         }

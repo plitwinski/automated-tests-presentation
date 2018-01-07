@@ -1,14 +1,20 @@
-﻿using Example.InMemoryDependencies.DataAccess;
+﻿using Example.InMemoryDependencies.Core;
+using Example.InMemoryDependencies.DataAccess;
+using Example.InMemoryDependencies.Messages;
 using Example.InMemoryDependencies.Models;
 using Example.ScenarioTesting.Tests.Factories;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Example.ScenarioTesting.Tests.Controllers.Movies
 {
-    public class WhenUpdatesArrived : ScenarioTestingBase
+    public class WhenUpdatesRequested : ScenarioTestingBase
     {
         private const string Cinema1 = "Cinema1";
         private const string Cinema2 = "Cinema2";
@@ -17,13 +23,19 @@ namespace Example.ScenarioTesting.Tests.Controllers.Movies
         private const int MovieId = 123;
         private CinemaUpdate[] _cinemaUpdates;
         private HttpClient _client;
+        private Mock<IQueueClient> _queueClientMock;
 
         public override async Task Given()
         {
-            var server = ServerFactory.CreateServer();
-            var context = SetupDatabase(server);
-            await context.SaveChangesAsync();
+            _queueClientMock = new Mock<IQueueClient>();
+            var context = await SetupDatabaseAsync();
 
+            var server = ServerFactory.CreateServer(new Dictionary<Type, object>()
+            {
+                { typeof(IQueueClient), _queueClientMock.Object },
+                { typeof(MoviesContext), context }
+            });
+            
             _client = server.CreateClient();
         }
 
@@ -31,10 +43,7 @@ namespace Example.ScenarioTesting.Tests.Controllers.Movies
         public override async Task When()
         {
             var result = await _client.GetAsync("api/movieUpdates");
-
-            var content = await result.Content.ReadAsStringAsync();
-
-            _cinemaUpdates = JsonConvert.DeserializeObject<CinemaUpdate[]>(content);
+            _cinemaUpdates = JsonConvert.DeserializeObject<CinemaUpdate[]>(await result.Content.ReadAsStringAsync());
         }
 
         [Test]
@@ -61,16 +70,25 @@ namespace Example.ScenarioTesting.Tests.Controllers.Movies
             Assert.IsNotEmpty(_cinemaUpdates[1].AddedMovies);
         }
 
-        private static MoviesContext SetupDatabase(Microsoft.AspNetCore.TestHost.TestServer server)
+        [Test]
+        public void ThenTwoEventsWerePublished()
         {
-            var context = server.Host.Services.GetService(typeof(MoviesContext)) as MoviesContext;
+            _queueClientMock.Verify(p => p.PublishMessageAsync(It.IsAny<MovieAddedMessage>()), Times.Exactly(2));
+        }
 
+        private static async Task<MoviesContext> SetupDatabaseAsync()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<MoviesContext>();
+            optionsBuilder.UseInMemoryDatabase("databaseName");
+
+            var context = new MoviesContext(optionsBuilder.Options);
             context.Movies.Add(new MovieEntity
             {
                 Id = MovieId,
                 Director = Director1,
                 Title = Movie1
             });
+            await context.SaveChangesAsync();
             return context;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Example.InMemoryDependencies;
 using Example.InMemoryDependencies.Core;
 using Example.InMemoryDependencies.DataAccess;
@@ -10,19 +11,17 @@ namespace Example.ScenarioTesting.Tests
 {
     public class TestStartup : Startup
     {
-        public TestStartup()
+        private readonly IDictionary<Type, object> mockedServices;
+
+        public TestStartup(IDictionary<Type, object> mockedServices)
         {
+            this.mockedServices = mockedServices;
         }
 
-        protected override void RegisterDatabase(IServiceCollection services)
+        protected override void AfterAllServicesRegistered(IServiceCollection services)
         {
-            services.AddDbContext<MoviesContext>(options => options.UseInMemoryDatabase("databaseName"));
-        }
-
-        protected override void RegisterCoreServices(IServiceCollection services)
-        {
-            base.RegisterCoreServices(services);
-            services.AddTransient(_ => Mock.Of<IQueueClient>());
+            foreach (var mockedService in mockedServices)
+                services.AddTransient(mockedService.Key, _ => mockedService.Value);
         }
     }
 }

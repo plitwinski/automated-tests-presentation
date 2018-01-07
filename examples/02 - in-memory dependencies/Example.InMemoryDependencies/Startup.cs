@@ -18,18 +18,24 @@ namespace Example.InMemoryDependencies
             RegisterDatabase(services);
             services.AddMvc();
             RegisterCoreServices(services);
+            AfterAllServicesRegistered(services);
         }
 
-        protected virtual void RegisterDatabase(IServiceCollection services)
+        protected void RegisterDatabase(IServiceCollection services)
         {
             services.AddDbContext<MoviesContext>(options => options.UseSqlServer("connectionString"));
         }
 
-        protected virtual void RegisterCoreServices(IServiceCollection services)
+        protected void RegisterCoreServices(IServiceCollection services)
         {
             services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddTransient<IMovieService, MovieService>();
             services.AddTransient<IQueueClient, QueueClient>();
+        }
+
+        protected virtual void AfterAllServicesRegistered(IServiceCollection services)
+        {
+            //FOR TESTIN PURPOSES, DO NOT DELETE
         }
     }
 }
