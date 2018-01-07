@@ -14,7 +14,7 @@ nodejs  6.9.5 (or higher)
 * cd Example.CoarseGrainedUTest.Tests 
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017
+#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
 
 ## example 02 - in-memory dependencies
 #### run following commands
@@ -22,15 +22,13 @@ nodejs  6.9.5 (or higher)
 * cd Example.InMemoryDependencies.Tests
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017
+#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
 
 ## example 03 - local hosting + headless firefox + json-server
 #### run following commands
 * npm run startWebServer (in separete process / console instance)
 * npm run startApi (in separete process / console instance)
 * npm run selenium-test (in separete process / console instance)
-#### or
-#### open, compile and run via test explorer in Visual Studio 2017
 
 ## example 04 - scenario testing
 #### run following commands
@@ -38,7 +36,7 @@ nodejs  6.9.5 (or higher)
 * cd Example.ScenarioTesting.Tests
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017
+#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
 
 ## example 05 - modularity
 #### run following commands
@@ -46,4 +44,4 @@ nodejs  6.9.5 (or higher)
 * cd Example.Modularity.Tests
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017
+#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
