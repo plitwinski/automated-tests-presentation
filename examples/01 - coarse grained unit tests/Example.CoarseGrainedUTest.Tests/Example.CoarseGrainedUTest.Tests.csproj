@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Example.CoarseGrainedUTest\Example.CoarseGrainedUTest.csproj" />
+    <ProjectReference Include="../Example.CoarseGrainedUTest/Example.CoarseGrainedUTest.csproj" />
   </ItemGroup>
 
 </Project>
