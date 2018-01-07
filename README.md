@@ -26,6 +26,14 @@ nodejs  6.9.5 (or higher)
 #### or
 #### open, compile and run via test explorer in Visual Studio 2017
 
+## example 03
+#### run following commands
+* npm run startWebServer (in separete process / console instance)
+* npm run startApi (in separete process / console instance)
+* npm run selenium-test (in separete process / console instance)
+#### or
+#### open, compile and run via test explorer in Visual Studio 2017
+
 ## example 04
 #### run following commands
 * dotnet restore
