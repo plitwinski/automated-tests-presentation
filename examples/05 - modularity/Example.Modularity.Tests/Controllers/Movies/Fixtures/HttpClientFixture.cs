@@ -1,5 +1,5 @@
 ﻿using Example.InMemoryDependencies.Core;
-using Example.Modularity.Tests.Factories;
+using Example.Modularity.Tests.Builders;
 using Moq;
 using System.Net.Http;
 
@@ -7,20 +7,20 @@ namespace Example.Modularity.Tests.Controllers.Movies.Fixtures
 {
     public class HttpClientFixture
     {
-        private readonly ServerFactory serverFactory;
+        private readonly ServerBuilder serverFactory;
 
         public Mock<IQueueClient> QueueClientMock { get; private set; }
 
         public HttpClientFixture()
         {
-            serverFactory = new ServerFactory();
+            serverFactory = new ServerBuilder();
         }
 
         public HttpClientFixture AddMovies()
         {
-            var context = new MoviesContextFactory("databaseNameFixture")
+            var context = new MoviesContextBuilder("databaseNameFixture")
                 .AddEntities(Data.Movie())
-                .Create();
+                .Build();
             serverFactory.AddMock(context);
             return this;
         }
@@ -34,7 +34,7 @@ namespace Example.Modularity.Tests.Controllers.Movies.Fixtures
 
         public HttpClient Create()
         {
-            return serverFactory.Create().CreateClient();
+            return serverFactory.Build().CreateClient();
         }
     }
 }

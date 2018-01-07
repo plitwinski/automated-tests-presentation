@@ -1,7 +1,7 @@
 ﻿using Example.InMemoryDependencies.Core;
 using Example.InMemoryDependencies.Messages;
 using Example.InMemoryDependencies.Models;
-using Example.Modularity.Tests.Factories;
+using Example.Modularity.Tests.Builders;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -23,14 +23,14 @@ namespace Example.Modularity.Tests.Controllers.Movies
         {
             _queueClientMock = new Mock<IQueueClient>();
 
-            var context = new MoviesContextFactory()
+            var context = new MoviesContextBuilder()
                 .AddEntities(Data.Movie())
-                .Create();
+                .Build();
 
-            var server = new ServerFactory()
+            var server = new ServerBuilder()
                 .AddMock(context)
                 .AddMock(_queueClientMock.Object)
-                .Create();
+                .Build();
 
             _client = server.CreateClient();
         }

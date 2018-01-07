@@ -1,18 +1,18 @@
 ﻿using Example.InMemoryDependencies.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace Example.Modularity.Tests.Factories
+namespace Example.Modularity.Tests.Builders
 {
-    internal class MoviesContextFactory
+    internal class MoviesContextBuilder
     {
         private readonly MoviesContext _context;
 
-        public MoviesContextFactory(string databaseName = null)
+        public MoviesContextBuilder(string databaseName = null)
         {
             _context = new MoviesContext(CreateInMemoryOptions(databaseName));
         }
 
-        public MoviesContextFactory AddEntities<TEntity>(params TEntity[] entities) where TEntity : class
+        public MoviesContextBuilder AddEntities<TEntity>(params TEntity[] entities) where TEntity : class
         {
             foreach (var entity in entities)
                 _context.Set<TEntity>().Add(entity);
@@ -20,7 +20,7 @@ namespace Example.Modularity.Tests.Factories
             return this;
         }
 
-        public MoviesContext Create()
+        public MoviesContext Build()
         {
             return _context;
         }

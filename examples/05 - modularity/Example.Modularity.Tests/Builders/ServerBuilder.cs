@@ -5,31 +5,31 @@ using Moq;
 using System;
 using System.Collections.Generic;
 
-namespace Example.Modularity.Tests.Factories
+namespace Example.Modularity.Tests.Builders
 {
-    public class ServerFactory
+    public class ServerBuilder
     {
         private readonly IDictionary<Type, object> mockedServices;
 
-        public ServerFactory()
+        public ServerBuilder()
         {
             mockedServices = new Dictionary<Type, object>();
         }
 
-        public ServerFactory AddMock<TMock>(TMock mockedObject) where TMock : class
+        public ServerBuilder AddMock<TMock>(TMock mockedObject) where TMock : class
         {
             mockedServices.Add(typeof(TMock), mockedObject);
             return this;
         }
 
-        public ServerFactory AddMock<TMock>() where TMock : class
+        public ServerBuilder AddMock<TMock>() where TMock : class
         {
             mockedServices.Add(typeof(TMock), Mock.Of<TMock>());
             return this;
         }
 
 
-        public TestServer Create()
+        public TestServer Build()
         {
             var webHostBuilder = new WebHostBuilder()
                                     .ConfigureServices(p => p.AddSingleton(mockedServices))
