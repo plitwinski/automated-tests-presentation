@@ -1,2 +1,2 @@
 # Automated testing in a distributed environment
-This repository contains a presentation about automated testing in a distributed environment and a few practical examples
+This repository contains the presentation about automated testing in a distributed environment and a few practical examples
