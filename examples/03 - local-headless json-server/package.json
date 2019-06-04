@@ -6,9 +6,9 @@
   "repository": "https://github.com/plitwinski/automated-tests-presentation",
   "scripts": {
     "selenium-test": "jest",
-    "start": "concurrently --kill-others \"npm run startWebServer\" \"npm run startApi\"",
-    "startWebServer": "browserify --debug --extension=js -o src/bundle.js src/index.js && http-server -p 8000",
-    "startApi": "json-server --watch test_data/db.json"
+    "start": "concurrently --kill-others \"npm run start-web-server\" \"npm run start-api\"",
+    "start-web-server": "browserify --debug --extension=js -o src/bundle.js src/index.js && http-server -p 8000",
+    "start-api": "json-server --watch test_data/db.json"
   },
   "author": "plitwinski",
   "license": "ISC",
@@ -24,6 +24,10 @@
         }
       ]
     ]
+  },
+  "jest": {
+    "verbose": true,
+	"testURL": "http://localhost/"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.35",
