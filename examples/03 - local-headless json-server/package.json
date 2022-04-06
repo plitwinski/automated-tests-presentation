@@ -51,7 +51,7 @@
     "selenium-webdriver": "^3.6.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.2",
     "jest": "^20.0.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
