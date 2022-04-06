@@ -3,7 +3,7 @@
 ## prerequisites
 
 ### example 01, 02, 04, 05
-* .NET Core 2.0 SDK (or higher)
+* .NET 6 SDK (or higher)
 
 ### example 03
 * nodejs  6.9.5 (or higher)
