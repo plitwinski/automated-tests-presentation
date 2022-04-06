@@ -10,7 +10,8 @@ namespace Example.InMemoryDependencies
     {
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -18,7 +19,6 @@ namespace Example.InMemoryDependencies
             RegisterDatabase(services);
             services.AddMvc();
             RegisterCoreServices(services);
-            AfterAllServicesRegistered(services);
         }
 
         protected void RegisterDatabase(IServiceCollection services)
@@ -31,11 +31,6 @@ namespace Example.InMemoryDependencies
             services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddTransient<IMovieService, MovieService>();
             services.AddTransient<IQueueClient, QueueClient>();
-        }
-
-        protected virtual void AfterAllServicesRegistered(IServiceCollection services)
-        {
-            //FOR TESTIN PURPOSES, DO NOT DELETE
         }
     }
 }

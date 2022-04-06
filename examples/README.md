@@ -15,7 +15,7 @@
 * cd Example.CoarseGrainedUTest.Tests 
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
+#### open, compile and run via test explorer in Visual Studio (Windows only)
 
 ## example 02 - in-memory dependencies
 #### run following commands
@@ -23,7 +23,7 @@
 * cd Example.InMemoryDependencies.Tests
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
+#### open, compile and run via test explorer in Visual Studio (Windows only)
 
 ## example 03 - local hosting + headless firefox + json-server
 #### run following commands
@@ -37,7 +37,7 @@
 * cd Example.ScenarioTesting.Tests
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
+#### open, compile and run via test explorer in Visual Studio (Windows only)
 
 ## example 05 - modularity
 #### run following commands
@@ -45,4 +45,4 @@
 * cd Example.Modularity.Tests
 * dotnet test
 #### or
-#### open, compile and run via test explorer in Visual Studio 2017 (Windows only)
+#### open, compile and run via test explorer in Visual Studio (Windows only)

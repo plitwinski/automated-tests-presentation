@@ -2,44 +2,51 @@
 using Example.InMemoryDependencies.DataAccess;
 using Example.InMemoryDependencies.Messages;
 using Example.InMemoryDependencies.Models;
-using Example.InMemoryDependencies.Tests.Factories;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Example.InMemoryDependencies.Tests.Controllers
 {
     public class MoviesControllerTests
     {
-        private const string Cinema1 = "Cinema1";
-        private const string Cinema2 = "Cinema2";
-        private const string Movie1 = "Movie1";
-        private const string Director1 = "Director1";
+        private const string MovieTitle = "MovieTitle";
+        private const string DirectorName = "DirectorName";
         private const int MovieId = 123;
+
+        private static readonly CinemaUpdate[] ExpectedResult = new[]
+        {
+            new CinemaUpdate("Cinema1", new[] { new Movie(MovieId, DirectorName, MovieTitle) }),
+            new CinemaUpdate("Cinema2", new[] { new Movie(MovieId, DirectorName, MovieTitle) })
+        };
 
         [Test]
         public async Task WhenUpdatesRequested_ThenMoviesEndpointReturnsDataAndMovieAddedMessageWasPublishedTwice()
         {
             var queueClientMock = new Mock<IQueueClient>();
             var context = await SetupDatabaseAsync();
-            var server = ServerFactory.CreateServer(new Dictionary<Type, object>()
-            {
-                { typeof(MoviesContext), context },
-                { typeof(IQueueClient), queueClientMock.Object }
-            });
-            var client = server.CreateClient();
+
+            var client = new WebApplicationFactory<Startup>()
+                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
+                    {
+                        services.AddTransient(_ => context);
+                        services.AddTransient(_ => queueClientMock.Object);
+
+                    })
+                )
+                .CreateClient();
 
             var result = await client.GetAsync("api/movieUpdates");
             var cinemaUpdates = JsonConvert.DeserializeObject<CinemaUpdate[]>(await result.Content.ReadAsStringAsync());
 
-            Assert.That(cinemaUpdates[0].Name, Is.EqualTo(Cinema1));
-            Assert.That(cinemaUpdates[1].Name, Is.EqualTo(Cinema2));
-            Assert.IsNotEmpty(cinemaUpdates[0].AddedMovies);
-            Assert.IsNotEmpty(cinemaUpdates[1].AddedMovies);
+            cinemaUpdates.Should()
+                .BeEquivalentTo(ExpectedResult);
+
             queueClientMock.Verify(p => p.PublishMessageAsync(It.IsAny<MovieAddedMessage>()), Times.Exactly(2));
         }
 
@@ -52,8 +59,8 @@ namespace Example.InMemoryDependencies.Tests.Controllers
             context.Movies.Add(new MovieEntity
             {
                 Id = MovieId,
-                Director = Director1,
-                Title = Movie1
+                Director = DirectorName,
+                Title = MovieTitle
             });
             await context.SaveChangesAsync();
             return context;

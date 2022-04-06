@@ -1,6 +1,6 @@
 {
   "name": "example_3",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "example showing headless firefox + web driver + json server tests",
   "main": "index.js",
   "repository": "https://github.com/plitwinski/automated-tests-presentation",

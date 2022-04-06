@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 
 namespace Example.InMemoryDependencies.Controllers
 {
-    public class MoviesController : Controller
+    [ApiController]
+    public class MoviesController : ControllerBase
     {
         private readonly IMovieService movieService;
 

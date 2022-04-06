@@ -7,3 +7,4 @@
 **/**/obj
 **/**/node_modules
 examples/03 - local-headless json-server/src/bundle*
+/examples/02 - in-memory dependencies/Example.InMemoryDependencies/Properties/launchSettings.json

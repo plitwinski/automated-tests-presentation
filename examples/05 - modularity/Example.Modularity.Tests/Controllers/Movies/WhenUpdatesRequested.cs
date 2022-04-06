@@ -1,7 +1,8 @@
-﻿using Example.InMemoryDependencies.Core;
+﻿using Example.InMemoryDependencies;
 using Example.InMemoryDependencies.Messages;
 using Example.InMemoryDependencies.Models;
-using Example.Modularity.Tests.Builders;
+using Example.Modularity.Tests.Controllers.Movies.Fixtures;
+using FluentAssertions;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -12,27 +13,17 @@ namespace Example.Modularity.Tests.Controllers.Movies
 {
     public class WhenUpdatesRequested : ScenarioTestingBase
     {
-        private const string Cinema1 = "Cinema1";
-        private const string Cinema2 = "Cinema2";
-        
         private CinemaUpdate[] _cinemaUpdates;
+        private WebApplicationFixture<Startup> _clientFixture;
         private HttpClient _client;
-        private Mock<IQueueClient> _queueClientMock;
 
         public override async Task Given()
         {
-            _queueClientMock = new Mock<IQueueClient>();
+            _clientFixture = new WebApplicationFixture<Startup>()
+                .AddMovies(Data.Movie())
+                .AddQueueClient();
 
-            var context = new MoviesContextBuilder()
-                .AddEntities(Data.Movie())
-                .Build();
-
-            var server = new ServerBuilder()
-                .AddMock(context)
-                .AddMock(_queueClientMock.Object)
-                .Build();
-
-            _client = server.CreateClient();
+            _client = _clientFixture.CreateClient();
         }
 
 
@@ -43,33 +34,16 @@ namespace Example.Modularity.Tests.Controllers.Movies
         }
 
         [Test]
-        public void ThenCinema1IsReturned()
+        public void ThenCinemaUpdatesIsReturned()
         {
-            Assert.That(_cinemaUpdates[0].Name, Is.EqualTo(Cinema1));
-        }
-
-        [Test]
-        public void ThenCinema1MoviesCollectionIsNotEmpty()
-        {
-            Assert.IsNotEmpty(_cinemaUpdates[0].AddedMovies);
-        }
-
-        [Test]
-        public void ThenCinema2IsReturned()
-        {
-            Assert.That(_cinemaUpdates[1].Name, Is.EqualTo(Cinema2));
-        }
-
-        [Test]
-        public void ThenCinema2MoviesCollectionIsNotEmpty()
-        {
-            Assert.IsNotEmpty(_cinemaUpdates[1].AddedMovies);
+            _cinemaUpdates.Should()
+                .BeEquivalentTo(Data.ExpectedResult);
         }
 
         [Test]
         public void ThenTwoEventsWerePublished()
         {
-            _queueClientMock.Verify(p => p.PublishMessageAsync(It.IsAny<MovieAddedMessage>()), Times.Exactly(2));
+            _clientFixture.QueueClientMock.Verify(p => p.PublishMessageAsync(It.IsAny<MovieAddedMessage>()), Times.Exactly(2));
         }
     }
 }

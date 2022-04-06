@@ -1,14 +1,15 @@
-﻿using Example.InMemoryDependencies.Core;
+﻿using Example.InMemoryDependencies;
+using Example.InMemoryDependencies.Core;
 using Example.InMemoryDependencies.DataAccess;
 using Example.InMemoryDependencies.Messages;
 using Example.InMemoryDependencies.Models;
-using Example.ScenarioTesting.Tests.Factories;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -16,27 +17,33 @@ namespace Example.ScenarioTesting.Tests.Controllers.Movies
 {
     public class WhenUpdatesRequested : ScenarioTestingBase
     {
-        private const string Cinema1 = "Cinema1";
-        private const string Cinema2 = "Cinema2";
-        private const string Movie1 = "Movie1";
-        private const string Director1 = "Director1";
+        private const string MovieTitle = "MovieTitle";
+        private const string DirectorName = "DirectorName";
         private const int MovieId = 123;
+
+        private static readonly CinemaUpdate[] ExpectedResult = new[]
+        {
+            new CinemaUpdate("Cinema1", new[] { new Movie(MovieId, DirectorName, MovieTitle) }),
+            new CinemaUpdate("Cinema2", new[] { new Movie(MovieId, DirectorName, MovieTitle) })
+        };
+
         private CinemaUpdate[] _cinemaUpdates;
         private HttpClient _client;
         private Mock<IQueueClient> _queueClientMock;
 
         public override async Task Given()
         {
-            _queueClientMock = new Mock<IQueueClient>();
             var context = await SetupDatabaseAsync();
+            _queueClientMock = new Mock<IQueueClient>();
+            _client = new WebApplicationFactory<Startup>()
+                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
+                {
+                    services.AddTransient(_ => context);
+                    services.AddTransient(_ => _queueClientMock.Object);
 
-            var server = ServerFactory.CreateServer(new Dictionary<Type, object>()
-            {
-                { typeof(IQueueClient), _queueClientMock.Object },
-                { typeof(MoviesContext), context }
-            });
-            
-            _client = server.CreateClient();
+                })
+                )
+                .CreateClient();
         }
 
 
@@ -47,27 +54,10 @@ namespace Example.ScenarioTesting.Tests.Controllers.Movies
         }
 
         [Test]
-        public void ThenCinema1IsReturned()
+        public void ThenCinemaUpdatesReturned()
         {
-            Assert.That(_cinemaUpdates[0].Name, Is.EqualTo(Cinema1));
-        }
-
-        [Test]
-        public void ThenCinema1MoviesCollectionIsNotEmpty()
-        {
-            Assert.IsNotEmpty(_cinemaUpdates[0].AddedMovies);
-        }
-
-        [Test]
-        public void ThenCinema2IsReturned()
-        {
-            Assert.That(_cinemaUpdates[1].Name, Is.EqualTo(Cinema2));
-        }
-
-        [Test]
-        public void ThenCinema2MoviesCollectionIsNotEmpty()
-        {
-            Assert.IsNotEmpty(_cinemaUpdates[1].AddedMovies);
+            _cinemaUpdates.Should()
+                .BeEquivalentTo(ExpectedResult);
         }
 
         [Test]
@@ -85,8 +75,8 @@ namespace Example.ScenarioTesting.Tests.Controllers.Movies
             context.Movies.Add(new MovieEntity
             {
                 Id = MovieId,
-                Director = Director1,
-                Title = Movie1
+                Director = DirectorName,
+                Title = MovieTitle
             });
             await context.SaveChangesAsync();
             return context;
