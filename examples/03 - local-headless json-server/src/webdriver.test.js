@@ -1,5 +1,6 @@
 import {Builder, By, Key, until} from 'selenium-webdriver'
 import firefox from 'selenium-webdriver/firefox';
+import gecodriver from 'geckodriver'; //this line is needed
 
 let driver = null
 
